@@ -25,6 +25,7 @@ public class Bit : MonoBehaviour {
 	
 	void Update () {
 		Move ();
+		Rotate ();
 		Shot ();
 		counter++;
 	}
@@ -34,14 +35,20 @@ public class Bit : MonoBehaviour {
 		if (radius < 90) { radius++; }
 		if (ofset != 0) { if (ofset > 0) { ofset--; } else { ofset++; } }
 		transform.localPosition = new Vector2 (Mathf.Cos (angle * Mathf.Deg2Rad), Mathf.Sin (angle * Mathf.Deg2Rad)) * radius * 2;
+	}
+
+	void Rotate (){
+		bullet_plant.transform.rotation = Quaternion.Euler (0, 0, 0);
 		transform.Rotate(new Vector3(0, 0, -30) * Time.deltaTime);
 	}
 
 	void Shot () {
 		if (counter%5 == 0){
-			Bullet bullet_clone = Instantiate (bullet_01, transform.position, transform.rotation) as Bullet;
+			Vector2 pos = transform.position;
+			Quaternion rot = Quaternion.Euler (0, 0, 0);
+			Bullet bullet_clone = Instantiate (bullet_01, pos, rot) as Bullet;
 			bullet_clone.transform.parent = bullet_plant.transform;
-			bullet_clone.rigidbody2D.velocity = new Vector2(0, 1500);
+			bullet_clone.rigidbody2D.velocity = new Vector2(0, 1000);
 			bullet_clone.setDamage(1);
 		}
 	}

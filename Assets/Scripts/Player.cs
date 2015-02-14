@@ -2,31 +2,36 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-
+	// Common
 	int counter;
-	public int life;
-	int power;
-	public float speed;
-//	float width;
+	float speed;
+	float width;
 	float height;
-	GameObject bit_store;
+	GameObject bullet_plant;
+	public GameObject explosion;
+	// Player
+	int life { set; get;}
+	int power;
+	GameObject bit_plant;
 	GameObject core;
 	public Bit bit;
-	public GameObject bullet_01;
-	public GameObject explosion;
+	public Bullet bullet_01;
 
 	void Start () {
 		counter = 0;
-		CreateBitStore ();
-		CreateCore ();
+		speed = 500;
+		life = 3;
+		SetBitPlant ();
+		SetBulletPlant ();
+		SetCore ();
 //		width = renderer.bounds.size.x;
 		height = renderer.bounds.size.y;
 	}
 	
 	void Update () {
 		Move ();
-//		if (counter%10 == 0){Shot ();}
-		if (power >= 5 * bit_store.transform.childCount) {BitAdd();}
+		if (counter%100 == 0){Shot ();}
+		if (power >= 5 * bit_plant.transform.childCount) {BitAdd();}
 		counter++;
 	}
 
@@ -46,27 +51,28 @@ public class Player : MonoBehaviour {
 	void Shot () {
 		Vector2 pos = transform.position;
 		pos.y += height/4;
-		GameObject bullet_clone = Instantiate (bullet_01, pos, transform.rotation) as GameObject;
+		Bullet bullet_clone = Instantiate (bullet_01, pos, transform.rotation) as Bullet;
+		bullet_clone.transform.parent = bullet_plant.transform;
 		bullet_clone.rigidbody2D.velocity = new Vector2(0, 1000);
 	}
 
 	void BitAdd (){
 		Bit bit_clone = Instantiate (bit, transform.position, transform.rotation) as Bit;
-		bit_clone.transform.parent = bit_store.transform;
+		bit_clone.transform.parent = bit_plant.transform;
 		SetBitAngle (1);
 	}
 
 	void BitDel (){
-		bit_store.transform.GetChild (bit_store.transform.childCount - 1).GetComponent<Bit> ().Explosion ();
+		bit_plant.transform.GetChild (bit_plant.transform.childCount - 1).GetComponent<Bit> ().Explosion ();
 		SetBitAngle (-1);
 	}
 
 	void SetBitAngle (int d){
 		int base_angle = 0;
-		for (int i = 0; i < bit_store.transform.childCount; i++) {
-			Bit bit_i = bit_store.transform.GetChild(i).GetComponent<Bit>();
+		for (int i = 0; i < bit_plant.transform.childCount; i++) {
+			Bit bit_i = bit_plant.transform.GetChild(i).GetComponent<Bit>();
 			if(i == 0){ base_angle = bit_i.getAngle(); }
-			bit_i.setAngle(base_angle, i, bit_store.transform.childCount, d);
+			bit_i.setAngle(base_angle, i, bit_plant.transform.childCount, d);
 		}
 		power = 0;
 	}
@@ -97,14 +103,19 @@ public class Player : MonoBehaviour {
 		if (life <= 0) {Destroy (gameObject);}
 	}
 
-	void CreateBitStore() {
-		bit_store = transform.FindChild ("BitStore").gameObject;
-		bit_store.transform.parent = transform;
-		bit_store.transform.position = transform.position;
+	void SetBitPlant () {
+		bit_plant = new GameObject ("BitPlant");
+		bit_plant.transform.parent = transform;
+		bit_plant.transform.position = transform.position;
 	}
 
-	void CreateCore() {
-		life = 3;
+	void SetBulletPlant () {
+		bullet_plant = new GameObject ("BulletPlant");
+		bullet_plant.transform.parent = transform;
+		bullet_plant.transform.position = transform.position;
+	}
+
+	void SetCore() {
 		core = transform.FindChild ("Core").gameObject;
 		core.transform.GetComponent<Animator> ().SetInteger ("life", life);
 	}

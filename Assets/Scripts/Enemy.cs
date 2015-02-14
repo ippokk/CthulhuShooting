@@ -2,22 +2,22 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-
-	private int state;
-	private int counter;
-	private int life;
-	public float speed;
-//	private float width;
-//	private float height;
-	public Bullet bullet_01;
+	// Common
+	int counter;
+	float speed;
+	float width;
+	float height;
+	GameObject bullet_plant;
 	public GameObject explosion;
+	// Enemy
+	public int life { set; get;}
+	int state;
+	public Bullet bullet_01;
 
 	void Start () {
 		state = 0;
 		counter = 0;
-		life = 10;
-//		width = renderer.bounds.size.x;
-//		height = renderer.bounds.size.y;
+		SetBulletPlant ();
 	}
 	
 	void Update () {
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour {
 
 	void OnBecameInvisible (){
 		if (state == 1) {
-			Destroy(gameObject);		
+			Destroy(gameObject);
 		}
 	}
 
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour {
 		if (counter%300 == 0){
 			for(int i = 0; i < 24; i++){
 				Bullet bullet_clone = Instantiate (bullet_01, transform.position, transform.rotation) as Bullet;
+				bullet_clone.transform.parent = bullet_plant.transform;
 				Vector2 direction = new Vector2 (Mathf.Cos (i * 2 * Mathf.PI / 24), Mathf.Sin (i * 2 * Mathf.PI / 24)).normalized;
 				float bullet_speed = 300;
 				bullet_clone.rigidbody2D.velocity = direction * bullet_speed;
@@ -61,10 +62,20 @@ public class Enemy : MonoBehaviour {
 			}
 			break;
 		}
+		transform.GetComponent<Animator> ().SetTrigger ("damage");
 	}
 
 	void Explosion (){
 		Instantiate (explosion, transform.position, transform.rotation);
+		for (int i = 0; i < bullet_plant.transform.childCount; i++) {
+			bullet_plant.transform.GetChild(i).transform.parent = null;
+		}
 		Destroy (gameObject);
 	} 
+
+	void SetBulletPlant () {
+		bullet_plant = new GameObject ("BulletPlant");
+		bullet_plant.transform.parent = transform;
+		bullet_plant.transform.position = transform.position;
+	}
 }

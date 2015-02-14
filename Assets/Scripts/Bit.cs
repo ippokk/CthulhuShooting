@@ -2,20 +2,25 @@
 using System.Collections;
 
 public class Bit : MonoBehaviour {
-
+	// Common
 	int counter;
-	int timer;
+	float speed;
+	float width;
+	float height;
+	GameObject bullet_plant;
+	public GameObject explosion;
+	// Bit
 	int angle;
 	int ofset;
 	int local_angle;
 	int radius;
 	public Bullet bullet_01;
-	public GameObject explosion;
 	public GameObject guard;
 
 	void Start () {
 		counter = 0;
 		radius = 0;
+		SetBulletPlant ();
 	}
 	
 	void Update () {
@@ -35,6 +40,7 @@ public class Bit : MonoBehaviour {
 	void Shot () {
 		if (counter%5 == 0){
 			Bullet bullet_clone = Instantiate (bullet_01, transform.position, transform.rotation) as Bullet;
+			bullet_clone.transform.parent = bullet_plant.transform;
 			bullet_clone.rigidbody2D.velocity = new Vector2(0, 1500);
 			bullet_clone.setDamage(1);
 		}
@@ -69,5 +75,11 @@ public class Bit : MonoBehaviour {
 		transform.parent = null;
 		Instantiate (explosion, transform.position, transform.rotation);
 		Destroy (gameObject);
-	} 
+	}
+
+	void SetBulletPlant () {
+		bullet_plant = new GameObject ("BulletPlant");
+		bullet_plant.transform.parent = transform;
+		bullet_plant.transform.position = transform.position;
+	}
 }

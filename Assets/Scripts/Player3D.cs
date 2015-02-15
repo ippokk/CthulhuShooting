@@ -5,8 +5,6 @@ public class Player3D : MonoBehaviour {
 	// Common
 	int counter;
 	float speed;
-	float width;
-	float height;
 	GameObject bullet_plant;
 	public GameObject explosion;
 	// Player
@@ -14,6 +12,7 @@ public class Player3D : MonoBehaviour {
 	int power;
 	GameObject bit_plant;
 	GameObject core;
+	GameObject body;
 	public Bit bit;
 	public Bullet bullet_01;
 	
@@ -23,9 +22,7 @@ public class Player3D : MonoBehaviour {
 		life = 3;
 		SetBitPlant ();
 		SetBulletPlant ();
-		SetCore ();
-		//		width = renderer.bounds.size.x;
-		height = renderer.bounds.size.y;
+		Set2DComponents ();
 	}
 	
 	void Update () {
@@ -40,19 +37,18 @@ public class Player3D : MonoBehaviour {
 		float dx = Input.GetAxisRaw("Horizontal");
 		float dy = Input.GetAxisRaw("Vertical");
 		Vector3 direction = new Vector3 (dx, dy, 0).normalized;
-		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0.10f, 0.05f));
-		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(0.68f, 0.95f));
+		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0.0375f, 0.05f));
+		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(0.68f, 0.72f));
 		Vector3 pos = transform.position;
 		pos += direction * speed * Time.deltaTime;
 		pos.x = Mathf.Clamp (pos.x, min.x, max.x);
-		pos.y = Mathf.Clamp (pos.y, min.y + height/2, max.y - height/2);
+		pos.y = Mathf.Clamp (pos.y, min.y, max.y);
 		transform.position = pos;
 	}
 	
 	void Shot () {
 		Bullet bullet_clone = Instantiate (bullet_01, transform.position, transform.rotation) as Bullet;
-		bullet_clone.rigidbody.AddForce(new Vector3(0, 10000, 0));
-		//		bullet_clone.rigidbody.velocity = new Vector3 (0, 1000, 0);
+		bullet_clone.rigidbody.velocity = new Vector3 (0, 1000, 0);
 	}
 	
 	void BitAdd (){
@@ -62,8 +58,10 @@ public class Player3D : MonoBehaviour {
 	}
 	
 	void BitDel (){
-		bit_plant.transform.GetChild (bit_plant.transform.childCount - 1).GetComponent<Bit> ().Explosion ();
-		SetBitAngle (-1);
+		if (bit_plant.transform.childCount != 0) {
+			bit_plant.transform.GetChild (bit_plant.transform.childCount - 1).GetComponent<Bit> ().Explosion ();
+			SetBitAngle (-1);
+		}
 	}
 	
 	void SetBitAngle (int d){
@@ -76,21 +74,18 @@ public class Player3D : MonoBehaviour {
 		power = 0;
 	}
 	
-	void OnTriggerEnter2D (Collider2D c){
+	void OnTriggerEnter (Collider c){
 		string layer_name = LayerMask.LayerToName (c.gameObject.layer);
 		switch (layer_name) {
-		case "E_0":
+		case "3D_E_B":
+			life --;
+			BitDel ();
 			Destroy (c.gameObject);
-			break;
-		case "E_B":
-			Destroy (c.gameObject);
+			core.transform.GetComponent<Animator> ().SetInteger ("life", life);
+			body.transform.GetComponent<Animator> ().SetTrigger ("damage");
 			break;
 		}
-		life --;
-		BitDel ();
-		Explosion ();
-		core.transform.GetComponent<Animator> ().SetInteger ("life", life);
-		transform.GetComponent<Animator> ().SetTrigger ("damage");
+		if (life <= 0) {Destroy (gameObject);}
 	}
 	
 	public void Charge() {
@@ -114,9 +109,10 @@ public class Player3D : MonoBehaviour {
 		bullet_plant.transform.position = transform.position;
 	}
 	
-	void SetCore() {
+	void Set2DComponents () {
 		core = transform.FindChild ("2D_Core").gameObject;
 		core.transform.GetComponent<Animator> ().SetInteger ("life", life);
+		body = transform.FindChild ("2D_Body").gameObject;
 	}
 	
 }

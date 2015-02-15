@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21298352}
   - 95: {fileID: 9598352}
   - 114: {fileID: 11446512}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Gurad_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

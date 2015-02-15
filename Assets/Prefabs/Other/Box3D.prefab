@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6575718}
   - 54: {fileID: 5475718}
   - 114: {fileID: 11475718}
-  m_Layer: 12
+  m_Layer: 17
   m_Name: Box3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

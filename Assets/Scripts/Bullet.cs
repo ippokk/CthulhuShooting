@@ -4,15 +4,18 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
 	public int damage{ set; get;}
-	public int state;
 
 	void Start () {
+		Destroy (gameObject, 3.0f);
 	}
 	
 	void Update () {
 	}
 
-	void OnBecameInvisible (){
-		Destroy (gameObject);
+	void OnTriggerEnter (Collider c){
+//		Destroy (gameObject);
 	}
+//	void OnBecameInvisible (){
+//			Destroy (gameObject);
+//	}
 }

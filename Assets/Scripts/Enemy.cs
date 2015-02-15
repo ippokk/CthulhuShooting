@@ -23,19 +23,19 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	void Update () {
-//		Shot ();
+		Shot ();
 		counter++;
 	}
 
-	void OnBecameVisible (){
-		state = 1;
-	}
-
-	void OnBecameInvisible (){
-		if (state == 1) {
-			Destroy(gameObject);
-		}
-	}
+//	void OnBecameVisible (){
+//		state = 1;
+//	}
+//
+//	void OnBecameInvisible (){
+//		if (state == 1) {
+//			Destroy(gameObject);
+//		}
+//	}
 
 	void Shot () {
 		if (counter%300 == 0){
@@ -44,27 +44,38 @@ public class Enemy : MonoBehaviour {
 				bullet_clone.transform.parent = bullet_plant.transform;
 				Vector2 direction = new Vector2 (Mathf.Cos (i * 2 * Mathf.PI / 24), Mathf.Sin (i * 2 * Mathf.PI / 24)).normalized;
 				float bullet_speed = 300;
-				bullet_clone.rigidbody2D.velocity = direction * bullet_speed;
+				bullet_clone.rigidbody.velocity = direction * bullet_speed;
 			}
 //			bullet.rigidbody2D.velocity = new Vector2(0, -500);
 		}
 	}
 
-	void OnTriggerEnter2D (Collider2D c){
+//	void OnTriggerEnter2D (Collider2D c){
+//		string layer_name = LayerMask.LayerToName (c.gameObject.layer);
+//		switch (layer_name) {
+//		case "P_0":
+//			Explosion ();
+//			break;
+//		case "P_B":
+//			Destroy (c.gameObject);
+//			life -= c.GetComponent<Bullet>().damage;
+//			if(life <= 0){
+//				Explosion ();
+//			}
+//			break;
+//		}
+//		transform.GetComponent<Animator> ().SetTrigger ("damage");
+//	}
+
+	void OnTriggerEnter (Collider c){
 		string layer_name = LayerMask.LayerToName (c.gameObject.layer);
 		switch (layer_name) {
-		case "P_0":
-			Explosion ();
-			break;
-		case "P_B":
+		case "3D_P_B":
 			Destroy (c.gameObject);
-			life -= c.GetComponent<Bullet>().damage;
-			if(life <= 0){
-				Explosion ();
-			}
+			life--;
 			break;
 		}
-		transform.GetComponent<Animator> ().SetTrigger ("damage");
+		if (life <= 0) {Explosion();}
 	}
 
 	void Explosion (){

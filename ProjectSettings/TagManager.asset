@@ -12,16 +12,16 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: P_O
-  User Layer 9: P_B
-  User Layer 10: E_O
-  User Layer 11: E_B
-  User Layer 12: I
-  User Layer 13: 3D
-  User Layer 14: Stage
-  User Layer 15: 
-  User Layer 16: 
-  User Layer 17: 
+  User Layer 8: 2D_P_O
+  User Layer 9: 2D_P_B
+  User Layer 10: 2D_E_O
+  User Layer 11: 2D_E_B
+  User Layer 12: 2D_Other
+  User Layer 13: 3D_P_O
+  User Layer 14: 3D_P_B
+  User Layer 15: 3D_E_O
+  User Layer 16: 3D_E_B
+  User Layer 17: 3D_other
   User Layer 18: 
   User Layer 19: 
   User Layer 20: 

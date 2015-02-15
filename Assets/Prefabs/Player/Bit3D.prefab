@@ -12,7 +12,7 @@ GameObject:
   - 135: {fileID: 13535454}
   - 23: {fileID: 2335454}
   - 114: {fileID: 11435454}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bit3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 435454}
   - 212: {fileID: 21235454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 2D_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b269914800e50cc45b23aec0a4ab9d82, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 149008, guid: a3534c28a362c9949942fbc8afecea53, type: 2}
-  bullet_01: {fileID: 11479636, guid: 0139ea505b2f3834f9a39ce5ecdf1600, type: 2}
+  bullet_01: {fileID: 11455236, guid: 9049830f0acf27b44851e4876f57396e, type: 2}
   guard: {fileID: 198352, guid: 1d755a5352a890a4dbc743604de4ee03, type: 2}
 --- !u!135 &13535454
 SphereCollider:

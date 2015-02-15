@@ -12,7 +12,7 @@ Platform assembly: D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\Assembl
 Loading D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.051 seconds
+- Completed reload, in  0.087 seconds
 desktop: 1366x768 60Hz; virtual: 3286x1080 at 0,-312
 <RI> Initializing input.
 <RI> Input initialized.

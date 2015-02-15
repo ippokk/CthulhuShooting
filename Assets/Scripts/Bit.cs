@@ -53,11 +53,11 @@ public class Bit : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D (Collider2D c){
+	void OnTriggerEnter (Collider c){
 		string layer_name = LayerMask.LayerToName (c.gameObject.layer);
 		if (layer_name == "E_B") {
 			Destroy (c.gameObject);
-			Guard() ;
+//			Guard() ;
 		}
 	}
 

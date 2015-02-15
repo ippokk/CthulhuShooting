@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Enemy : MonoBehaviour {
 	// Common
@@ -21,7 +23,7 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	void Update () {
-		Shot ();
+//		Shot ();
 		counter++;
 	}
 
@@ -56,7 +58,7 @@ public class Enemy : MonoBehaviour {
 			break;
 		case "P_B":
 			Destroy (c.gameObject);
-			life -= c.GetComponent<Bullet>().getDamage();
+			life -= c.GetComponent<Bullet>().damage;
 			if(life <= 0){
 				Explosion ();
 			}
@@ -67,9 +69,14 @@ public class Enemy : MonoBehaviour {
 
 	void Explosion (){
 		Instantiate (explosion, transform.position, transform.rotation);
-		for (int i = 0; i < bullet_plant.transform.childCount; i++) {
-			bullet_plant.transform.GetChild(i).transform.parent = null;
-		}
+//		foreach (Transform t in bullet_plant.transform.GetComponentInChildren<Transform> ()) {
+//			if(t != transform){
+//				t.parent = null;
+//			}
+//		}
+//		for (int i = 0; i < bullet_plant.transform.childCount; i++) {
+//			bullet_plant.transform.GetChild(i).transform.parent = null;
+//		}
 		Destroy (gameObject);
 	} 
 

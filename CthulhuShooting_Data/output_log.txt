@@ -1,0 +1,19 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.1]
+    Renderer: Intel(R) HD Graphics Family (ID=0x116)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.051 seconds
+desktop: 1366x768 60Hz; virtual: 3286x1080 at 0,-312
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: D:\unity\CthulhuShooting\CthulhuShooting_Data\Managed\System.Core.dll (this message is harmless)

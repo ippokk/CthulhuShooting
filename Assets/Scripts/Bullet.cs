@@ -3,25 +3,16 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	private int damage;
+	public int damage{ set; get;}
+	public int state;
 
 	void Start () {
-	
 	}
 	
 	void Update () {
-	
 	}
 
-	public void setDamage(int d){
-		damage = d;	
-	}
-
-	public int getDamage(){
-		return damage;	
-	}
-
-	void OnBecameInvisible() {
+	void OnBecameInvisible (){
 		Destroy (gameObject);
 	}
 }

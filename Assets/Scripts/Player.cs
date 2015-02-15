@@ -39,8 +39,8 @@ public class Player : MonoBehaviour {
 		float dx = Input.GetAxisRaw("Horizontal");
 		float dy = Input.GetAxisRaw("Vertical");
 		Vector2 direction = new Vector2 (dx, dy).normalized;
-		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0.10f, 0.05f));
+		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(0.68f, 0.95f));
 		Vector2 pos = transform.position;
 		pos += direction * speed * Time.deltaTime;
 		pos.x = Mathf.Clamp (pos.x, min.x, max.x);
@@ -49,11 +49,11 @@ public class Player : MonoBehaviour {
 	}
 
 	void Shot () {
-		Vector2 pos = transform.position;
+		Vector3 pos = transform.position;
 		pos.y += height/4;
 		Bullet bullet_clone = Instantiate (bullet_01, pos, transform.rotation) as Bullet;
-		bullet_clone.transform.parent = bullet_plant.transform;
-		bullet_clone.rigidbody2D.velocity = new Vector2(0, 1000);
+		bullet_clone.rigidbody.AddForce(new Vector3(0, 10000, 0));
+//		bullet_clone.rigidbody.velocity = new Vector3 (0, 1000, 0);
 	}
 
 	void BitAdd (){
